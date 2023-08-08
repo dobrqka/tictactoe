@@ -26,6 +26,12 @@ h1 {
   align-items: center;
 }
 
+.game-field {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+}
+
 .board {
   height: 50vh;
   width: 50vw;
@@ -38,6 +44,23 @@ h1 {
   margin: auto; */
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+
+.card1,
+.card2 {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.card1 > div:nth-child(2n - 1),
+.card2 > div:nth-child(2n - 1) {
+  align-self: end;
+  font-size: 1.5rem;
+}
+
+.card1 > div:nth-child(2n),
+.card2 > div:nth-child(2n) {
+  font-size: 1.5rem;
 }
 
 .field {
@@ -69,7 +92,8 @@ h1 {
   background-color: rgb(226, 226, 252);
 }
 
-.form1 {
+.form1,
+.form2 {
   position: absolute;
   left: 0;
   right: 0;
@@ -86,17 +110,20 @@ h1 {
   display: none;
 }
 
-.save1 {
+.save1,
+.save2 {
   border: none;
   font-size: 1.2rem;
   border-radius: 2rem;
 }
 
-.save1:hover {
+.save1:hover,
+.save2:hover {
   background-color: white;
 }
 
-.save1:active {
+.save1:active,
+.save2:active {
   background-color: rgb(233, 233, 233);
 }
 

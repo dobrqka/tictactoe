@@ -24,17 +24,51 @@ const showGameboard = () => {
   // renders the gameboard array contents on the webpages using 'X' and 'O'
 };
 
-// 1.Press start button
-// 2.Get prompted to insert Player1 Name and pick a symbol
-// 3.Get prompted to insert Player2 Name and automatically assign remaining symbol
-// 4.Player one makes a move > his symbol is added to the corresponding
-//position in the array.
-// 5.Player two makes a move > his symbol is added as well
+const addDiv = (text, parent) => {
+  const newDiv = document.createElement("div");
+  newDiv.textContent = text;
+  parent.appendChild(newDiv);
+};
+
+let players = [];
+const cardOne = document.querySelector(".card1");
+const cardTwo = document.querySelector(".card2");
+
+const showFormTwo = () => {
+  const formTwo = document.querySelector(".form2");
+  formTwo.style.display = "grid";
+  const saveButton = document.querySelector(".save2");
+  saveButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const name = document.querySelector("#player2").value;
+    let symbol;
+    if (players[0].symbol == "X") {
+      symbol = "O";
+    } else if (players[0].symbol == "O") {
+      symbol = "XS";
+    }
+    const playerTwo = Player(name, symbol);
+    players.push(playerTwo);
+    formTwo.reset();
+    formTwo.style.display = "none";
+    addDiv("Играч 2: ", cardTwo);
+    addDiv(players[1].name, cardTwo);
+    addDiv("Символ: ", cardTwo);
+    addDiv(players[1].symbol, cardTwo);
+  });
+};
 
 const startGame = (function () {
   const startButton = document.querySelector("#start-button");
   const formOne = document.querySelector(".form1");
   startButton.addEventListener("click", () => {
+    while (cardOne.firstChild) {
+      cardOne.removeChild(cardOne.firstChild);
+    }
+    while (cardTwo.firstChild) {
+      cardTwo.removeChild(cardTwo.firstChild);
+    }
+    players = [];
     if (formOne.style.display == "none") {
       formOne.style.display = "grid";
     } else {
@@ -49,8 +83,14 @@ const startGame = (function () {
       'input[name="symbol1"]:checked'
     ).value;
     const playerOne = Player(name, symbol);
-    console.log(playerOne);
+    players.push(playerOne);
+    showFormTwo();
     formOne.reset();
-    // code that creates player 1 and displays their stats
+    formOne.style.display = "none";
+    addDiv("Играч 1: ", cardOne);
+    addDiv(players[0].name, cardOne);
+    addDiv("Символ: ", cardOne);
+    addDiv(players[0].symbol, cardOne);
+    return players;
   });
 })();
