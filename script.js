@@ -12,18 +12,6 @@ const Player = (name, symbol) => {
   return { name, symbol };
 };
 
-// const playerOne;
-
-// const playerTwo;
-
-const Gameflow = () => {
-  // module that controls the flow of the game
-};
-
-const showGameboard = () => {
-  // renders the gameboard array contents on the webpages using 'X' and 'O'
-};
-
 const addDiv = (text, parent) => {
   const newDiv = document.createElement("div");
   newDiv.textContent = text;
@@ -45,7 +33,7 @@ const showFormTwo = () => {
     if (players[0].symbol == "X") {
       symbol = "O";
     } else if (players[0].symbol == "O") {
-      symbol = "XS";
+      symbol = "X";
     }
     const playerTwo = Player(name, symbol);
     players.push(playerTwo);
@@ -94,3 +82,21 @@ const startGame = (function () {
     return players;
   });
 })();
+
+const Gameflow = (function () {
+  // module that controls the flow of the game
+  const boxes = document.querySelectorAll(".field");
+  boxes.forEach((box) =>
+    box.addEventListener("click", (e) => {
+      const mark = document.createElement("div");
+      mark.classList.add("mark");
+      mark.textContent = players[0].symbol;
+      console.log(mark);
+      e.target.appendChild(mark);
+    })
+  );
+})();
+
+const showGameboard = () => {
+  // renders the gameboard array contents on the webpages using 'X' and 'O'
+};

@@ -65,6 +65,9 @@ h1 {
 
 .field {
   border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button {
@@ -135,4 +138,8 @@ label {
 p {
   color: white;
   font-size: 1.8rem;
+}
+
+.mark {
+  font-size: 5rem;
 }
