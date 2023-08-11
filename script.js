@@ -25,8 +25,8 @@ const cardTwo = document.querySelector(".card2");
 const showFormTwo = () => {
   const formTwo = document.querySelector(".form2");
   formTwo.style.display = "grid";
-  const saveButton = document.querySelector(".save2");
-  saveButton.addEventListener("click", (e) => {
+  const saveButtonTwo = document.querySelector(".save2");
+  saveButtonTwo.addEventListener("click", (e) => {
     e.preventDefault();
     const name = document.querySelector("#player2").value;
     let symbol;
@@ -108,37 +108,42 @@ const gameFlow = (function () {
           e.target.textContent = players[0].symbol;
         }
       }
+      playGame();
     })
   );
 })();
 
-// create an array from the gamefields and their content
-//
-// select all the play field divs in a node list
-// convert it to an array
-// update the array as their content changes
-// add conditionals for the end of the round
-
 const playGame = () => {
-  let gameFields = document.querySelectorAll(".game-field");
+  let gameFields = document.querySelectorAll(".field");
   if (
-    (gameFields[0].textContent == gameFields[1].textContent) ==
-      gameFields[2].textContent ||
-    (gameFields[3].textContent == gameFields[4].textContent) ==
-      gameFields[5].textContent ||
-    (gameFields[6].textContent == gameFields[7].textContent) ==
-      gameFields[8].textContent ||
-    (gameFields[0].textContent == gameFields[3].textContent) ==
-      gameFields[6].textContent ||
-    (gameFields[1].textContent == gameFields[4].textContent) ==
-      gameFields[7].textContent ||
-    (gameFields[2].textContent == gameFields[5].textContent) ==
-      gameFields[8].textContent ||
-    (gameFields[0].textContent == gameFields[4].textContent) ==
-      gameFields[8].textContent ||
-    (gameFields[2].textContent == gameFields[4].textContent) ==
-      gameFields[6].textContent
+    (gameFields[0].textContent == gameFields[1].textContent &&
+      gameFields[0].textContent == gameFields[2].textContent &&
+      gameFields[0].textContent == ("X" || "O")) ||
+    (gameFields[3].textContent == gameFields[4].textContent &&
+      gameFields[3].textContent == gameFields[5].textContent &&
+      gameFields[3].textContent == ("X" || "O")) ||
+    (gameFields[6].textContent == gameFields[7].textContent &&
+      gameFields[6].textContent == gameFields[8].textContent &&
+      gameFields[6].textContent == ("X" || "O")) ||
+    (gameFields[0].textContent == gameFields[3].textContent &&
+      gameFields[0].textContent == gameFields[6].textContent &&
+      gameFields[0].textContent == ("X" || "O")) ||
+    (gameFields[1].textContent == gameFields[4].textContent &&
+      gameFields[1].textContent == gameFields[7].textContent &&
+      gameFields[1].textContent == ("X" || "O")) ||
+    (gameFields[2].textContent == gameFields[5].textContent &&
+      gameFields[2].textContent == gameFields[8].textContent &&
+      gameFields[2].textContent == ("X" || "O")) ||
+    (gameFields[0].textContent == gameFields[4].textContent &&
+      gameFields[0] == gameFields[8].textContent &&
+      gameFields[0] == ("X" || "O")) ||
+    (gameFields[2].textContent == gameFields[4].textContent &&
+      gameFields[2].textContent == gameFields[6].textContent &&
+      gameFields[2].textContent == ("X" || "O"))
   ) {
     alert("We have a winner!");
   }
+  // else if (there are no empty fields) {alert("It's a tie!")}
 };
+
+//bonus points for AI?
