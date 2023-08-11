@@ -142,8 +142,13 @@ const playGame = () => {
       gameFields[2].textContent == ("X" || "O"))
   ) {
     alert("We have a winner!");
+  } else if (
+    document.querySelectorAll(".mark1").length +
+      document.querySelectorAll(".mark2").length ==
+    9
+  ) {
+    alert("It's a tie!");
   }
-  // else if (there are no empty fields) {alert("It's a tie!")}
 };
 
 //bonus points for AI?
