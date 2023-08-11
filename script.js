@@ -49,7 +49,13 @@ const showFormTwo = () => {
 const startGame = (function () {
   const startButton = document.querySelector("#start-button");
   const formOne = document.querySelector(".form1");
+  const boxes = document.querySelectorAll(".field");
   startButton.addEventListener("click", () => {
+    boxes.forEach((box) => {
+      while (box.firstChild) {
+        box.removeChild(box.firstChild);
+      }
+    });
     while (cardOne.firstChild) {
       cardOne.removeChild(cardOne.firstChild);
     }
@@ -83,16 +89,28 @@ const startGame = (function () {
   });
 })();
 
-const Gameflow = (function () {
+const gameFlow = (function () {
   // module that controls the flow of the game
   const boxes = document.querySelectorAll(".field");
   boxes.forEach((box) =>
     box.addEventListener("click", (e) => {
       const mark = document.createElement("div");
-      mark.classList.add("mark");
-      mark.textContent = players[0].symbol;
-      console.log(mark);
-      e.target.appendChild(mark);
+      if (
+        document.querySelectorAll(".mark1").length >
+        document.querySelectorAll(".mark2").length
+      ) {
+        mark.classList.add("mark2");
+        mark.textContent = players[1].symbol;
+        if (!e.target.firstChild) {
+          e.target.appendChild(mark);
+        }
+      } else {
+        mark.classList.add("mark1");
+        mark.textContent = players[0].symbol;
+        if (!e.target.firstChild) {
+          e.target.appendChild(mark);
+        }
+      }
     })
   );
 })();
