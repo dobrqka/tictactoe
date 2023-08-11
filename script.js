@@ -94,27 +94,51 @@ const gameFlow = (function () {
   const boxes = document.querySelectorAll(".field");
   boxes.forEach((box) =>
     box.addEventListener("click", (e) => {
-      const mark = document.createElement("div");
       if (
         document.querySelectorAll(".mark1").length >
         document.querySelectorAll(".mark2").length
       ) {
-        mark.classList.add("mark2");
-        mark.textContent = players[1].symbol;
+        box.classList.add("mark2");
         if (!e.target.firstChild) {
-          e.target.appendChild(mark);
+          e.target.textContent = players[1].symbol;
         }
       } else {
-        mark.classList.add("mark1");
-        mark.textContent = players[0].symbol;
+        box.classList.add("mark1");
         if (!e.target.firstChild) {
-          e.target.appendChild(mark);
+          e.target.textContent = players[0].symbol;
         }
       }
     })
   );
 })();
 
-const showGameboard = () => {
-  // renders the gameboard array contents on the webpages using 'X' and 'O'
+// create an array from the gamefields and their content
+//
+// select all the play field divs in a node list
+// convert it to an array
+// update the array as their content changes
+// add conditionals for the end of the round
+
+const playGame = () => {
+  let gameFields = document.querySelectorAll(".game-field");
+  if (
+    (gameFields[0].textContent == gameFields[1].textContent) ==
+      gameFields[2].textContent ||
+    (gameFields[3].textContent == gameFields[4].textContent) ==
+      gameFields[5].textContent ||
+    (gameFields[6].textContent == gameFields[7].textContent) ==
+      gameFields[8].textContent ||
+    (gameFields[0].textContent == gameFields[3].textContent) ==
+      gameFields[6].textContent ||
+    (gameFields[1].textContent == gameFields[4].textContent) ==
+      gameFields[7].textContent ||
+    (gameFields[2].textContent == gameFields[5].textContent) ==
+      gameFields[8].textContent ||
+    (gameFields[0].textContent == gameFields[4].textContent) ==
+      gameFields[8].textContent ||
+    (gameFields[2].textContent == gameFields[4].textContent) ==
+      gameFields[6].textContent
+  ) {
+    alert("We have a winner!");
+  }
 };
