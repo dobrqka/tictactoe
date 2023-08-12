@@ -54,6 +54,7 @@ const showFormTwo = () => {
     formTwo.style.display = "none";
   }
   const saveButtonTwo = document.querySelector(".save2");
+  document.querySelector("#player2").focus();
   saveButtonTwo.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -80,6 +81,8 @@ const startGame = (function () {
   const formOne = document.querySelector(".form1");
   const boxes = document.querySelectorAll(".field");
   startButton.addEventListener("click", () => {
+    const endScreen = document.querySelector(".end-screen");
+    endScreen.style.display = "none";
     boxes.forEach((box) => {
       box.classList.remove("mark1");
       box.classList.remove("mark2");
@@ -99,6 +102,7 @@ const startGame = (function () {
     } else {
       formOne.style.display = "none";
     }
+    document.querySelector("#player1").focus();
   });
   const saveButton = document.querySelector(".save1");
   saveButton.addEventListener("click", (e) => {
@@ -148,6 +152,8 @@ const gameFlow = (function () {
 
 const playGame = () => {
   let gameFields = document.querySelectorAll(".field");
+  const endScreen = document.querySelector(".end-screen");
+  let endText = document.querySelector(".end-text");
   if (
     (gameFields[0].textContent == gameFields[1].textContent &&
       gameFields[0].textContent == gameFields[2].textContent &&
@@ -186,14 +192,32 @@ const playGame = () => {
     ) {
       winner = players[1].name;
     }
-    alert(`${winner} печели!`);
+    endText.textContent = `${winner} печели!`;
+    endScreen.style.display = "grid";
   } else if (
     document.querySelectorAll(".mark1").length +
       document.querySelectorAll(".mark2").length ==
     9
   ) {
-    alert("It's a tie!");
+    endText.textContent = `Равен!`;
+    endScreen.style.display = "grid";
   }
 };
 
-//bonus points for AI?
+// button that resets the game with the same player details
+
+const newGame = () => {
+  const endScreen = document.querySelector(".end-screen");
+  endScreen.style.display = "none";
+  const boxes = document.querySelectorAll(".field");
+  boxes.forEach((box) => {
+    box.classList.remove("mark1");
+    box.classList.remove("mark2");
+    while (box.firstChild) {
+      box.removeChild(box.firstChild);
+    }
+  });
+};
+
+const newRound = document.querySelector(".new-round");
+newRound.addEventListener("click", newGame);
