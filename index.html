@@ -5,12 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@200&family=Lobster&family=Montserrat&family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
   <body>
     <div class="main-container">
       <div class="header">
+        <img
+          src="images/tic.png"
+          alt="A logo of a tic-tac-toe game"
+          class="logo-left"
+        />
         <h1>Морски шах</h1>
+        <a href="https://github.com/dobrqka" target="_blank">
+          <img
+            src="images/chickin.png"
+            alt="A pixelated image of a chicken"
+            class="logo"
+          />
+        </a>
       </div>
       <div class="game-field">
         <div class="card1"></div>
@@ -28,7 +46,7 @@
         <div class="card2"></div>
       </div>
       <div class="button">
-        <button type="default" id="start-button">Започни игра</button>
+        <button type="default" id="start-button">Нова игра</button>
       </div>
       <!-- <div class="footer"></div> -->
     </div>
@@ -55,7 +73,9 @@
     </form>
     <div class="end-screen" style="display: none">
       <div class="end-text"></div>
-      <button type="default" class="new-round">Нов рунд</button>
+      <div class="button-container">
+        <button type="default" class="new-round">Нов рунд</button>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
