@@ -1,12 +1,3 @@
-const Gameboard = () => {
-  // module that has an array with gameboard
-  let currentBoard = [];
-  const getBoard = () => {
-    return currentBoard;
-  };
-  return { getBoard };
-};
-
 const Player = (name, symbol) => {
   // factory that's used to create players
   return { name, symbol };
@@ -22,20 +13,58 @@ let players = [];
 const cardOne = document.querySelector(".card1");
 const cardTwo = document.querySelector(".card2");
 
+// const showFormTwo = () => {
+//   const formTwo = document.querySelector(".form2");
+//   // formTwo.style.display = "grid";
+//   if (formTwo.style.display == "none") {
+//     formTwo.style.display = "grid";
+//   } else {
+//     formTwo.style.display = "none";
+//   }
+//   const saveButtonTwo = document.querySelector(".save2");
+//   saveButtonTwo.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     const nameTwo = document.querySelector("#player2").value;
+//     let symbolTwo;
+//     if (players[0].symbol == "X") {
+//       symbolTwo = "O";
+//     } else if (players[0].symbol == "O") {
+//       symbolTwo = "X";
+//     }
+//     const playerTwo = Player(nameTwo, symbolTwo);
+//     // players.push(playerTwo);
+//     formTwo.reset();
+//     formTwo.style.display = "none";
+//     players.push(playerTwo);
+//     console.log(playerTwo);
+//     console.log(players);
+//     addDiv("Играч 2: ", cardTwo);
+//     addDiv(players[1].name, cardTwo);
+//     addDiv("Символ: ", cardTwo);
+//     addDiv(players[1].symbol, cardTwo);
+//   });
+// };
+
 const showFormTwo = () => {
   const formTwo = document.querySelector(".form2");
-  formTwo.style.display = "grid";
+  // formTwo.style.display = "grid";
+  if (formTwo.style.display == "none") {
+    formTwo.style.display = "grid";
+  } else {
+    formTwo.style.display = "none";
+  }
   const saveButtonTwo = document.querySelector(".save2");
   saveButtonTwo.addEventListener("click", (e) => {
     e.preventDefault();
-    const name = document.querySelector("#player2").value;
-    let symbol;
+    e.stopImmediatePropagation();
+    const nameTwo = document.querySelector("#player2").value;
+    let symbolTwo;
     if (players[0].symbol == "X") {
-      symbol = "O";
+      symbolTwo = "O";
     } else if (players[0].symbol == "O") {
-      symbol = "X";
+      symbolTwo = "X";
     }
-    const playerTwo = Player(name, symbol);
+    const playerTwo = Player(nameTwo, symbolTwo);
     players.push(playerTwo);
     formTwo.reset();
     formTwo.style.display = "none";
@@ -52,6 +81,8 @@ const startGame = (function () {
   const boxes = document.querySelectorAll(".field");
   startButton.addEventListener("click", () => {
     boxes.forEach((box) => {
+      box.classList.remove("mark1");
+      box.classList.remove("mark2");
       while (box.firstChild) {
         box.removeChild(box.firstChild);
       }
@@ -78,19 +109,19 @@ const startGame = (function () {
     ).value;
     const playerOne = Player(name, symbol);
     players.push(playerOne);
-    showFormTwo();
+    // showFormTwo();
     formOne.reset();
     formOne.style.display = "none";
     addDiv("Играч 1: ", cardOne);
     addDiv(players[0].name, cardOne);
     addDiv("Символ: ", cardOne);
     addDiv(players[0].symbol, cardOne);
-    return players;
+    showFormTwo();
   });
 })();
 
 const gameFlow = (function () {
-  // module that controls the flow of the game
+  // adds marks in boxes and controls how players take turns
   const boxes = document.querySelectorAll(".field");
   boxes.forEach((box) =>
     box.addEventListener("click", (e) => {
@@ -113,35 +144,49 @@ const gameFlow = (function () {
   );
 })();
 
+// checks if there's a winner or if the game is a tie
+
 const playGame = () => {
   let gameFields = document.querySelectorAll(".field");
   if (
     (gameFields[0].textContent == gameFields[1].textContent &&
       gameFields[0].textContent == gameFields[2].textContent &&
-      gameFields[0].textContent == ("X" || "O")) ||
+      (gameFields[0].textContent == "X" || gameFields[0].textContent == "O")) ||
     (gameFields[3].textContent == gameFields[4].textContent &&
       gameFields[3].textContent == gameFields[5].textContent &&
-      gameFields[3].textContent == ("X" || "O")) ||
+      (gameFields[3].textContent == "X" || gameFields[3].textContent == "O")) ||
     (gameFields[6].textContent == gameFields[7].textContent &&
       gameFields[6].textContent == gameFields[8].textContent &&
-      gameFields[6].textContent == ("X" || "O")) ||
+      (gameFields[6].textContent == "X" || gameFields[6].textContent == "O")) ||
     (gameFields[0].textContent == gameFields[3].textContent &&
       gameFields[0].textContent == gameFields[6].textContent &&
-      gameFields[0].textContent == ("X" || "O")) ||
+      (gameFields[0].textContent == "X" || gameFields[0].textContent == "O")) ||
     (gameFields[1].textContent == gameFields[4].textContent &&
       gameFields[1].textContent == gameFields[7].textContent &&
-      gameFields[1].textContent == ("X" || "O")) ||
+      (gameFields[1].textContent == "X" || gameFields[1].textContent == "O")) ||
     (gameFields[2].textContent == gameFields[5].textContent &&
       gameFields[2].textContent == gameFields[8].textContent &&
-      gameFields[2].textContent == ("X" || "O")) ||
+      (gameFields[2].textContent == "X" || gameFields[2].textContent == "O")) ||
     (gameFields[0].textContent == gameFields[4].textContent &&
-      gameFields[0] == gameFields[8].textContent &&
-      gameFields[0] == ("X" || "O")) ||
+      gameFields[0].textContent == gameFields[8].textContent &&
+      (gameFields[0].textContent == "X" || gameFields[0].textContent == "O")) ||
     (gameFields[2].textContent == gameFields[4].textContent &&
       gameFields[2].textContent == gameFields[6].textContent &&
-      gameFields[2].textContent == ("X" || "O"))
+      (gameFields[2].textContent == "X" || gameFields[2].textContent == "O"))
   ) {
-    alert("We have a winner!");
+    let winner;
+    if (
+      document.querySelectorAll(".mark1").length >
+      document.querySelectorAll(".mark2").length
+    ) {
+      winner = players[0].name;
+    } else if (
+      document.querySelectorAll(".mark1").length ==
+      document.querySelectorAll(".mark2").length
+    ) {
+      winner = players[1].name;
+    }
+    alert(`${winner} печели!`);
   } else if (
     document.querySelectorAll(".mark1").length +
       document.querySelectorAll(".mark2").length ==
