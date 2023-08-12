@@ -55,11 +55,11 @@
         <label for="player1">Играч 1: </label>
         <input type="text" id="player1" />
       </p>
-      <p>
+      <p class="radio-section">
         Символ:
-        <label for="X">X</label>
+        <label class="radios" for="X">X</label>
         <input type="radio" id="X" name="symbol1" value="X" />
-        <label for="O">O</label>
+        <label class="radios" for="O">O</label>
         <input type="radio" id="O" name="symbol1" value="O" />
       </p>
       <button class="save1">Запази</button>
@@ -71,8 +71,11 @@
       </p>
       <button class="save2">Запази</button>
     </form>
-    <div class="end-screen" style="display: none">
+    <div class="end-screen">
       <div class="end-text"></div>
+      <div class="trophy">
+        <img src="images/win.png" alt="A logo of a trophy" />
+      </div>
       <div class="button-container">
         <button type="default" class="new-round">Нов рунд</button>
       </div>

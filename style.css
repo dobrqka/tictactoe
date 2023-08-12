@@ -59,7 +59,7 @@ a {
 .board {
   height: 60vh;
   width: 36vw;
-  border: 1px solid black;
+  border: 1px solid rgb(187, 187, 187);
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 }
@@ -84,12 +84,13 @@ a {
 }
 
 .field {
-  border: 1px solid black;
+  border: 1px solid rgb(187, 187, 187);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 7rem;
   font-weight: 60;
+  color: rgb(61, 61, 61);
 }
 
 .button {
@@ -108,6 +109,7 @@ a {
   border: none;
   background-color: white;
   font-weight: 900;
+  color: rgb(97, 97, 97);
 }
 
 #start-button:hover {
@@ -131,9 +133,41 @@ a {
   background-color: rgb(155, 155, 255);
   display: grid;
   align-items: center;
+  justify-content: center;
   padding: 1rem;
-  gap: 1rem;
+  /* gap: 1rem; */
   display: none;
+}
+
+input[type="text"] {
+  font-size: 1.6rem;
+  width: 15rem;
+  padding-left: 0.3rem;
+  border: none;
+  border-radius: 0.2rem;
+  color: rgb(27, 27, 27);
+}
+
+.radio-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.radios {
+  width: 3rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  justify-self: center;
+  align-self: center;
+  display: grid;
+  justify-content: center;
+  background-color: white;
+  color: rgb(94, 94, 94);
+  border-radius: 0.3rem;
 }
 
 .save1,
@@ -141,6 +175,7 @@ a {
   border: none;
   font-size: 1.2rem;
   border-radius: 2rem;
+  background-color: rgb(238, 238, 238);
 }
 
 .save1:hover,
@@ -174,11 +209,11 @@ p {
   top: 0;
   bottom: 0;
   margin: auto;
-  width: 25vw;
-  height: 25vh;
+  width: 24vw;
+  height: 24vh;
   background-color: rgb(255, 111, 111);
   display: none;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 9vh 8vh 7vh;
   border-radius: 1rem;
   border: none;
 }
@@ -189,6 +224,15 @@ p {
   justify-self: center;
   align-self: center;
   font-weight: 900;
+}
+
+.trophy {
+  align-self: center;
+  justify-self: center;
+}
+
+.trophy > img {
+  width: 5rem;
 }
 
 .button-container {

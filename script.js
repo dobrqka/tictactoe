@@ -13,37 +13,20 @@ let players = [];
 const cardOne = document.querySelector(".card1");
 const cardTwo = document.querySelector(".card2");
 
-// const showFormTwo = () => {
-//   const formTwo = document.querySelector(".form2");
-//   // formTwo.style.display = "grid";
-//   if (formTwo.style.display == "none") {
-//     formTwo.style.display = "grid";
-//   } else {
-//     formTwo.style.display = "none";
-//   }
-//   const saveButtonTwo = document.querySelector(".save2");
-//   saveButtonTwo.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     const nameTwo = document.querySelector("#player2").value;
-//     let symbolTwo;
-//     if (players[0].symbol == "X") {
-//       symbolTwo = "O";
-//     } else if (players[0].symbol == "O") {
-//       symbolTwo = "X";
-//     }
-//     const playerTwo = Player(nameTwo, symbolTwo);
-//     // players.push(playerTwo);
-//     formTwo.reset();
-//     formTwo.style.display = "none";
-//     players.push(playerTwo);
-//     console.log(playerTwo);
-//     console.log(players);
-//     addDiv("Играч 2: ", cardTwo);
-//     addDiv(players[1].name, cardTwo);
-//     addDiv("Символ: ", cardTwo);
-//     addDiv(players[1].symbol, cardTwo);
-//   });
-// };
+const customRadios = () => {
+  const radios = document.querySelectorAll('input[type="radio"]');
+  const label = document.querySelectorAll(".radios");
+  radios.forEach((radio) =>
+    radio.addEventListener("click", () => {
+      for (let i = 0; i < radios.length; i++) {
+        label[i].style.outline = "none";
+        if (radios[i].checked == true) {
+          label[i].style.outline = "0.2rem solid #00ff00";
+        }
+      }
+    })
+  );
+};
 
 const showFormTwo = () => {
   const formTwo = document.querySelector(".form2");
@@ -58,21 +41,26 @@ const showFormTwo = () => {
   saveButtonTwo.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
-    const nameTwo = document.querySelector("#player2").value;
-    let symbolTwo;
-    if (players[0].symbol == "X") {
-      symbolTwo = "O";
-    } else if (players[0].symbol == "O") {
-      symbolTwo = "X";
+    if (document.querySelector("#player2").value == "") {
+      alert("Моля въведете име.");
+      return;
+    } else {
+      const nameTwo = document.querySelector("#player2").value;
+      let symbolTwo;
+      if (players[0].symbol == "X") {
+        symbolTwo = "O";
+      } else if (players[0].symbol == "O") {
+        symbolTwo = "X";
+      }
+      const playerTwo = Player(nameTwo, symbolTwo);
+      players.push(playerTwo);
+      formTwo.reset();
+      formTwo.style.display = "none";
+      addDiv("Играч 2: ", cardTwo);
+      addDiv(players[1].name, cardTwo);
+      addDiv("Символ: ", cardTwo);
+      addDiv(players[1].symbol, cardTwo);
     }
-    const playerTwo = Player(nameTwo, symbolTwo);
-    players.push(playerTwo);
-    formTwo.reset();
-    formTwo.style.display = "none";
-    addDiv("Играч 2: ", cardTwo);
-    addDiv(players[1].name, cardTwo);
-    addDiv("Символ: ", cardTwo);
-    addDiv(players[1].symbol, cardTwo);
   });
 };
 
@@ -103,24 +91,32 @@ const startGame = (function () {
       formOne.style.display = "none";
     }
     document.querySelector("#player1").focus();
+    customRadios();
   });
   const saveButton = document.querySelector(".save1");
   saveButton.addEventListener("click", (e) => {
     e.preventDefault();
-    const name = document.querySelector("#player1").value;
-    const symbol = document.querySelector(
-      'input[name="symbol1"]:checked'
-    ).value;
-    const playerOne = Player(name, symbol);
-    players.push(playerOne);
-    // showFormTwo();
-    formOne.reset();
-    formOne.style.display = "none";
-    addDiv("Играч 1: ", cardOne);
-    addDiv(players[0].name, cardOne);
-    addDiv("Символ: ", cardOne);
-    addDiv(players[0].symbol, cardOne);
-    showFormTwo();
+    if (document.querySelector("#player1").value == "") {
+      alert("Моля въведете име.");
+      return;
+    } else {
+      const labels = document.querySelectorAll(".radios");
+      labels.forEach((label) => (label.style.outline = "none"));
+      const name = document.querySelector("#player1").value;
+      const symbol = document.querySelector(
+        'input[name="symbol1"]:checked'
+      ).value;
+      const playerOne = Player(name, symbol);
+      players.push(playerOne);
+      // showFormTwo();
+      formOne.reset();
+      formOne.style.display = "none";
+      addDiv("Играч 1: ", cardOne);
+      addDiv(players[0].name, cardOne);
+      addDiv("Символ: ", cardOne);
+      addDiv(players[0].symbol, cardOne);
+      showFormTwo();
+    }
   });
 })();
 
